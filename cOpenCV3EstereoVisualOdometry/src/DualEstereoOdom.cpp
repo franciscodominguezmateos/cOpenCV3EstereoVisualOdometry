@@ -91,76 +91,7 @@ int main(int argc, char** argv) {
 	cur_frame_c2 = imread(path+"/image_2/000000.png");
 	cur_frame_c3= imread(path+"/image_3/000000.png");
 	DualEstereoVisualOdometry dsvo2(cur_frame_c2,cur_frame_c3);
-	/* some function tests
-	vector<Point3f> prev3Dpts;
-	vector<Point2f> cur2DforPnP;
-	prev3Dpts.push_back(Point3f( 1, 0, 10));
-	prev3Dpts.push_back(Point3f( 1, 0, 20));
-	prev3Dpts.push_back(Point3f(-1, 0, 20));
-	prev3Dpts.push_back(Point3f(-1, 0, 10));
-	prev3Dpts.push_back(Point3f( 0, 0, 10));
-	prev3Dpts.push_back(Point3f(-1, 0, 10));
-	prev3Dpts.push_back(Point3f(-1,-1, 10));
-	prev3Dpts.push_back(Point3f( 1,-1, 10));
-	prev3Dpts.push_back(Point3f( 1, 0, 10));
-	prev3Dpts.push_back(Point3f( 1,-1, 10));
-	prev3Dpts.push_back(Point3f( 1, 1, 10));
-	prev3Dpts.push_back(Point3f( 0, 0, 15));
-	prev3Dpts.push_back(Point3f(-1, 0, 15));
-	prev3Dpts.push_back(Point3f(-1,-1, 15));
-	prev3Dpts.push_back(Point3f( 1,-1, 15));
-	prev3Dpts.push_back(Point3f( 1, 0, 15));
-	prev3Dpts.push_back(Point3f( 1,-1, 15));
-	prev3Dpts.push_back(Point3f( 1, 1, 15));
-	Mat rvec,tll,inliers;
-	tll = (Mat_<double>(3, 1) << 0., 1., 0.);
-	rvec = (Mat_<double>(3, 1) << PI/16.0, 0*PI/8.0, 0.);
-	cout << "rvec" << rvec << endl;
-	cout << "tll=" << tll << endl;
-	Mat K=dsvo2.K;
-	cv::projectPoints(prev3Dpts,rvec,tll,K,Mat(),cur2DforPnP);
-	//Transformation estimation 3D-3D
-	vector<Point3f> cur3Dpts;
-	Mat R,t;
-	Rodrigues(rvec,R);
-	Mat T=(Mat_<double>(3, 4) << R.at<double>(0,0), R.at<double>(0,1), R.at<double>(0,2), tll.at<double>(0,0),
-			                     R.at<double>(1,0), R.at<double>(1,1), R.at<double>(1,2), tll.at<double>(1,0),
-								 R.at<double>(2,0), R.at<double>(2,1), R.at<double>(2,2), tll.at<double>(2,0));
-	cout << "R"<< R <<endl;
-	cout << "t"<< t <<endl;
-	cv::transform(prev3Dpts,cur3Dpts,T);
-	Mat  cur3DMat=Mat( cur3Dpts).reshape(1);
-	Mat prev3DMat=Mat(prev3Dpts).reshape(1);
-	//cout << "centerR(prev3Dpts)"<<centerR(prev3DMat)<<endl;
-	//cout << "centerR(prev3Dpts)"<<prev3DMat<<endl;
-	rigidTransformation(prev3DMat,cur3DMat,R,t);
-	cout << "R"<< R <<endl;
-	cout << "t"<< t <<endl;
 
-
-	Mat pimg(380,1200, CV_8UC3, Scalar(255,255,255));
-	line(pimg,cur2DforPnP[0],cur2DforPnP[1],Scalar(255,0,0));
-	line(pimg,cur2DforPnP[1],cur2DforPnP[2],Scalar(255,0,0));
-	line(pimg,cur2DforPnP[2],cur2DforPnP[3],Scalar(255,0,0));
-	line(pimg,cur2DforPnP[3],cur2DforPnP[0],Scalar(255,0,0));
-	for(unsigned int i=4;i<cur2DforPnP.size();i++){
-		if(i>11)
-			circle(pimg,cur2DforPnP[i],2,Scalar(0,0,255));
-		else
-			circle(pimg,cur2DforPnP[i],2,Scalar(0,255,0));
-	}
-	imshow("pimg",pimg);
-	//Transformation estimation 3D-2D
-	solvePnPRansac(prev3Dpts, cur2DforPnP, K, Mat(), rvec, tll,false,500,2,0.99,inliers, SOLVEPNP_ITERATIVE );//SOLVEPNP_EPNP
-
-	Rodrigues(rvec,R);
-	t=-R.t()*tll;
-	cout << "rvec" << rvec << endl;
-	cout << "tll=" << tll << endl;
-	cout << "t=" << t << endl;
-	cout << inliers.size() << endl;
-	waitKey(0);
-    */
 	float l=0;//trajectory length
 	for (int i=1; i<=SEQ_MAX; i+=1) {
 		string nf2=path+"/image_2/"+get_sequence(i)+".png";
