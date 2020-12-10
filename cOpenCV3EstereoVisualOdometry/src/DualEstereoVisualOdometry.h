@@ -190,7 +190,7 @@ public :
 	Mat curDisp,prevDisp;
 	Mat curPointCloud,prevPointCloud;
 	//Stereo Matches
-	Ptr<StereoMatcher> sm;
+	Ptr<cv::StereoMatcher> sm;
 	//Reprojection Matrix from 2D (u,v) and disp to 3D (X,Y,Z)
 	Mat Q;
 	double baseLine;
